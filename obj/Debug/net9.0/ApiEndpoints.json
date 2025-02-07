@@ -771,22 +771,6 @@
   },
   {
     "ContainingType": "Kiosco.Controllers.UserController",
-    "Method": "PostUser",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "Kiosco.Models.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Kiosco.Controllers.UserController",
     "Method": "GetUser",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "GET",

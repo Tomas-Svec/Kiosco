@@ -70,7 +70,15 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var passwordMigrationService = scope.ServiceProvider.GetRequiredService<PasswordMigrationService>();
-    passwordMigrationService.MigratePasswords();
+
+    // Ejecutar la migración solo si hay contraseñas pendientes
+    var pendingUsers = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>()
+        .Users.Any(u => !u.PasswordHash.StartsWith("$2"));
+
+    if (pendingUsers)
+    {
+        passwordMigrationService.MigratePasswords();
+    }
 }
 
 // Configurar el pipeline de solicitudes HTTP

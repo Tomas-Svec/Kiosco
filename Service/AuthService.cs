@@ -32,7 +32,7 @@ namespace Kiosco.Service
 
         public void MigratePasswords()
         {
-            // Obtener todos los usuarios con contraseñas hasheadas con SHA256
+            // Obtener todos los usuarios con contraseñas no hasheadas o hasheadas con SHA256
             var users = _context.Users
                 .Where(u => !string.IsNullOrEmpty(u.PasswordHash) && !u.PasswordHash.StartsWith("$2")) // Filtra hashes inválidos
                 .ToList();
@@ -48,10 +48,17 @@ namespace Kiosco.Service
         }
 
 
+        private string HashPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException("La contraseña no puede estar vacía.");
 
-        //REGISTRO
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
+        }
+
         public async Task<AuthResponseDto> Register(RegisterDto registerDto)
         {
+            
             // Verificar si el email ya está registrado
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
             if (existingUser != null)
@@ -61,12 +68,12 @@ namespace Kiosco.Service
 
             // Hashear la contraseña usando BCrypt
             var passwordHash = HashPassword(registerDto.Password);
-
+            Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
             // Crear el nuevo usuario
             var newUser = new User
             {
                 Email = registerDto.Email,
-                PasswordHash = passwordHash, // Contraseña hasheada
+                PasswordHash = passwordHash, // Aquí se guarda el hash
                 Rol = registerDto.Rol,
                 RefreshToken = null,
                 RefreshTokenExpiry = DateTime.UtcNow
@@ -75,6 +82,7 @@ namespace Kiosco.Service
             // Guardar el usuario en la base de datos
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
+            Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
 
             // Generar tokens JWT para el nuevo usuario
             var accessToken = GenerateAccessToken(newUser);
@@ -90,14 +98,8 @@ namespace Kiosco.Service
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
+            Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
         }
-
-        private string HashPassword(string password)
-        {
-            // Genera un hash seguro usando BCrypt
-            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
-        }
-
 
 
 

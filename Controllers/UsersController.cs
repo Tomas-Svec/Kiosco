@@ -89,27 +89,7 @@ namespace Kiosco.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostUser(User user)
-        {
-            // Validar campos obligatorios
-            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash))
-            {
-                return BadRequest(new { message = "El correo electrónico y la contraseña son obligatorios." });
-            }
-
-            // Validar la fecha de expiración del token
-            if (user.RefreshTokenExpiry < new DateTime(1753, 1, 1))
-            {
-                return BadRequest(new { message = "La fecha de expiración del token no es válida." });
-            }
-
-            // Agregar el usuario a la base de datos
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-        }
+        
 
         // PUT: api/User/5
         [HttpPut("{id}")]

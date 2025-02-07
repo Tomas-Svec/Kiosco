@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Kiosco.Models;
+using Kiosco.DTOs;
 
 namespace Kiosco.Data
 {
@@ -23,6 +24,11 @@ namespace Kiosco.Data
             base.OnModelCreating(modelBuilder);
 
             // Configuraciones adicionales (si es necesario)
+        }
+
+        internal async Task Register(RegisterDto registerDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

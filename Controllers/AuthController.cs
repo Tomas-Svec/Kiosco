@@ -18,8 +18,13 @@ namespace Kiosco.Controllers
 
         //REGISTRO
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 var response = await _authService.Register(registerDto);
@@ -31,6 +36,7 @@ namespace Kiosco.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         // POST: api/Auth/login
         [HttpPost("login")]
