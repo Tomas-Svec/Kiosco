@@ -155,5 +155,6 @@ E:\Kiosco\Kiosco\obj\Debug\net9.0\refint\Kiosco.dll
 E:\Kiosco\Kiosco\obj\Debug\net9.0\Kiosco.pdb
 E:\Kiosco\Kiosco\obj\Debug\net9.0\Kiosco.genruntimeconfig.cache
 E:\Kiosco\Kiosco\obj\Debug\net9.0\ref\Kiosco.dll
-E:\Kiosco\Kiosco\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 E:\Kiosco\Kiosco\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\Kiosco\Kiosco\obj\Debug\net9.0\Kiosco.sourcelink.json
+E:\Kiosco\Kiosco\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

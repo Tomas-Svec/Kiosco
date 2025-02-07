@@ -89,9 +89,8 @@ namespace Kiosco.Controllers
             return Ok(user);
         }
 
-        // POST: api/User
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<IActionResult> PostUser(User user)
         {
             // Validar campos obligatorios
             if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash))

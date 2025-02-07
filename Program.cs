@@ -8,6 +8,8 @@ using Kiosco.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Registrar AuthService
+builder.Services.AddTransient<AuthService>();
 
 // Configurar DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -43,8 +45,7 @@ builder.Services.AddAuthentication(options =>
 // Habilitar autorización
 builder.Services.AddAuthorization();
 
-// Registrar AuthService
-builder.Services.AddTransient<AuthService>();
+
 
 // Configurar CORS
 builder.Services.AddCors(options =>

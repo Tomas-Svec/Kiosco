@@ -15,6 +15,23 @@ namespace Kiosco.Controllers
             _authService = authService;
         }
 
+
+        //REGISTRO
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
+        {
+            try
+            {
+                var response = await _authService.Register(registerDto);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error durante el registro: {ex.Message}");
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         // POST: api/Auth/login
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)

@@ -29,6 +29,79 @@ namespace Kiosco.Service
             Console.WriteLine($"Clave secreta cargada: {_jwtSecret}");
         }
 
+
+        public void MigratePasswords()
+        {
+            // Obtener todos los usuarios con contraseñas hasheadas con SHA256
+            var users = _context.Users
+                .Where(u => !string.IsNullOrEmpty(u.PasswordHash) && !u.PasswordHash.StartsWith("$2")) // Filtra hashes inválidos
+                .ToList();
+
+            foreach (var user in users)
+            {
+                // Re-hashear la contraseña existente con BCrypt
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash, BCrypt.Net.BCrypt.GenerateSalt());
+            }
+
+            // Guardar los cambios en la base de datos
+            _context.SaveChanges();
+        }
+
+
+
+        //REGISTRO
+        public async Task<AuthResponseDto> Register(RegisterDto registerDto)
+        {
+            // Verificar si el email ya está registrado
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
+            if (existingUser != null)
+            {
+                throw new InvalidOperationException("El email ya está registrado.");
+            }
+
+            // Hashear la contraseña usando BCrypt
+            var passwordHash = HashPassword(registerDto.Password);
+
+            // Crear el nuevo usuario
+            var newUser = new User
+            {
+                Email = registerDto.Email,
+                PasswordHash = passwordHash, // Contraseña hasheada
+                Rol = registerDto.Rol,
+                RefreshToken = null,
+                RefreshTokenExpiry = DateTime.UtcNow
+            };
+
+            // Guardar el usuario en la base de datos
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            // Generar tokens JWT para el nuevo usuario
+            var accessToken = GenerateAccessToken(newUser);
+            var refreshToken = GenerateRefreshToken();
+
+            // Actualizar el Refresh Token del usuario
+            newUser.RefreshToken = refreshToken;
+            newUser.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+            await _context.SaveChangesAsync();
+
+            return new AuthResponseDto
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            };
+        }
+
+        private string HashPassword(string password)
+        {
+            // Genera un hash seguro usando BCrypt
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
+        }
+
+
+
+
+
         public async Task<AuthResponseDto> Authenticate(LoginDto loginDto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
