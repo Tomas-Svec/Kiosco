@@ -8,6 +8,9 @@ namespace Kiosco.DTOs
         [EmailAddress(ErrorMessage = "El formato del email no es válido")]
         public string Email { get; set; }
 
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
         public string Password { get; set; }

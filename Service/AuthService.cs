@@ -58,7 +58,6 @@ namespace Kiosco.Service
 
         public async Task<AuthResponseDto> Register(RegisterDto registerDto)
         {
-            
             // Verificar si el email ya está registrado
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
             if (existingUser != null)
@@ -69,9 +68,12 @@ namespace Kiosco.Service
             // Hashear la contraseña usando BCrypt
             var passwordHash = HashPassword(registerDto.Password);
             Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
+
             // Crear el nuevo usuario
             var newUser = new User
             {
+                Nombre = registerDto.Nombre,  // ✅ Se agregan Nombre y Apellido
+                Apellido = registerDto.Apellido,
                 Email = registerDto.Email,
                 PasswordHash = passwordHash, // Aquí se guarda el hash
                 Rol = registerDto.Rol,
@@ -82,7 +84,7 @@ namespace Kiosco.Service
             // Guardar el usuario en la base de datos
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
+            Console.WriteLine($"Usuario registrado: {newUser.Nombre} {newUser.Apellido}");
 
             // Generar tokens JWT para el nuevo usuario
             var accessToken = GenerateAccessToken(newUser);
@@ -98,8 +100,8 @@ namespace Kiosco.Service
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
-            Console.WriteLine($"Hash generado para la contraseña: {passwordHash}");
         }
+
 
 
 

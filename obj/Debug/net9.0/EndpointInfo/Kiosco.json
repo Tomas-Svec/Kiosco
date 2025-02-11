@@ -1624,6 +1624,14 @@
             "type": "string",
             "format": "email"
           },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
           "password": {
             "minLength": 6,
             "type": "string"
