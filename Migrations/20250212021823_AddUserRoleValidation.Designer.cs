@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kiosco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250211170530_AddNombreApellidoToUsers")]
-    partial class AddNombreApellidoToUsers
+    [Migration("20250212021823_AddUserRoleValidation")]
+    partial class AddUserRoleValidation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,17 +94,12 @@ namespace Kiosco.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProveedorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("ProveedorId");
 
                     b.ToTable("Products");
                 });
@@ -165,34 +160,6 @@ namespace Kiosco.Migrations
                     b.ToTable("SaleDetails");
                 });
 
-            modelBuilder.Entity("Kiosco.Models.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contacto")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Suppliers");
-                });
-
             modelBuilder.Entity("Kiosco.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -222,7 +189,6 @@ namespace Kiosco.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RefreshTokenExpiry")
@@ -235,7 +201,7 @@ namespace Kiosco.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Kiosco.Models.AuditLog", b =>
@@ -254,18 +220,10 @@ namespace Kiosco.Migrations
                     b.HasOne("Kiosco.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Kiosco.Models.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("ProveedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Kiosco.Models.Sale", b =>

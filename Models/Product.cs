@@ -20,12 +20,9 @@ namespace Kiosco.Models
         [Required]
         public int Stock { get; set; }
 
+        // Relación con Category
         [ForeignKey("Category")]
         public int CategoriaId { get; set; }
         public Category Category { get; set; }
-
-        [ForeignKey("Supplier")]
-        public int ProveedorId { get; set; }
-        public Supplier Supplier { get; set; }
     }
 }

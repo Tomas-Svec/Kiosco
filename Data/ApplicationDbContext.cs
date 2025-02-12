@@ -13,7 +13,6 @@ namespace Kiosco.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
@@ -23,12 +22,16 @@ namespace Kiosco.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuraciones adicionales (si es necesario)
+            modelBuilder.Entity<User>().ToTable("Users");
+
+            // Configuración de relaciones
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany()
+                .HasForeignKey(p => p.CategoriaId)
+                .OnDelete(DeleteBehavior.Cascade); // Elimina los productos asociados al eliminar la categorí
         }
 
-        internal async Task Register(RegisterDto registerDto)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

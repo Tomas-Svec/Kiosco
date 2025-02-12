@@ -85,9 +85,18 @@ namespace Kiosco.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Categoría no encontrada." });
             }
 
+            // Asignar una categoría predeterminada a los productos asociados
+            const int defaultCategoryId = 1; // ID de la categoría "Sin Categoría"
+            var productsToUpdate = await _context.Products.Where(p => p.CategoriaId == id).ToListAsync();
+            foreach (var product in productsToUpdate)
+            {
+                product.CategoriaId = defaultCategoryId;
+            }
+
+            // Eliminar la categoría
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 

@@ -25,21 +25,6 @@ namespace Kiosco.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Contacto = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -49,7 +34,9 @@ namespace Kiosco.Migrations
                     Apellido = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Rol = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Rol = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefreshTokenExpiry = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,8 +53,7 @@ namespace Kiosco.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
-                    CategoriaId = table.Column<int>(type: "int", nullable: false),
-                    ProveedorId = table.Column<int>(type: "int", nullable: false)
+                    CategoriaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,13 +63,7 @@ namespace Kiosco.Migrations
                         column: x => x.CategoriaId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Suppliers_ProveedorId",
-                        column: x => x.ProveedorId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +97,7 @@ namespace Kiosco.Migrations
                     VentaId = table.Column<int>(type: "int", nullable: false),
                     EmpleadoId = table.Column<int>(type: "int", nullable: false),
                     FechaModificacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Accion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Accion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,12 +106,6 @@ namespace Kiosco.Migrations
                         name: "FK_AuditLogs_Sales_VentaId",
                         column: x => x.VentaId,
                         principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AuditLogs_Users_EmpleadoId",
-                        column: x => x.EmpleadoId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -165,11 +139,6 @@ namespace Kiosco.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AuditLogs_EmpleadoId",
-                table: "AuditLogs",
-                column: "EmpleadoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AuditLogs_VentaId",
                 table: "AuditLogs",
                 column: "VentaId");
@@ -178,11 +147,6 @@ namespace Kiosco.Migrations
                 name: "IX_Products_CategoriaId",
                 table: "Products",
                 column: "CategoriaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_ProveedorId",
-                table: "Products",
-                column: "ProveedorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SaleDetails_ProductoId",
@@ -217,9 +181,6 @@ namespace Kiosco.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Suppliers");
 
             migrationBuilder.DropTable(
                 name: "Users");

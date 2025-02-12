@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Kiosco.Validators;
 
 namespace Kiosco.DTOs
 {
@@ -15,7 +16,8 @@ namespace Kiosco.DTOs
         [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "El rol es obligatorio")]
-        public string Rol { get; set; } // Ejemplo: "Empleado", "Jefe"
+        [Required(ErrorMessage = "El rol es obligatorio.")]
+        [ValidUserRole(ErrorMessage = "El rol debe ser 'Empleado' o 'Jefe'.")] // Aplica la validación aquí
+        public string Rol { get; set; } = string.Empty;
     }
 }

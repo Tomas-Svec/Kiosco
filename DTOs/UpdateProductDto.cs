@@ -5,18 +5,20 @@ namespace Kiosco.DTOs
     public class UpdateProductDto
     {
         [Required(ErrorMessage = "El nombre es obligatorio")]
+        [MaxLength(150)]
         public string Nombre { get; set; }
 
-        public string Descripcion { get; set; } // Opcional
+        public string Descripcion { get; set; }
 
+        [Required(ErrorMessage = "El precio es obligatorio")]
         [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor que cero")]
-        public decimal? Precio { get; set; } // Opcional
+        public decimal? Precio { get; set; }
 
+        [Required(ErrorMessage = "El stock es obligatorio")]
         [Range(0, int.MaxValue, ErrorMessage = "El stock no puede ser negativo")]
-        public int? Stock { get; set; } // Opcional
+        public int? Stock { get; set; }
 
-        public int? CategoriaId { get; set; } // Opcional
-
-        public int? ProveedorId { get; set; } // Opcional
+        [Required(ErrorMessage = "La categoría es obligatoria")]
+        public int? CategoriaId { get; set; }
     }
 }

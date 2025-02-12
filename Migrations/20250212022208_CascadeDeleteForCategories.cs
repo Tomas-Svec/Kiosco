@@ -5,7 +5,7 @@
 namespace Kiosco.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRefreshTokenToUser : Migration
+    public partial class CascadeDeleteForCategories : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

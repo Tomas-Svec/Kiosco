@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kiosco.Validators;
 
 namespace Kiosco.Models
 {
+    [Table("Users")]
     public class User
     {
         [Key]
@@ -26,9 +28,10 @@ namespace Kiosco.Models
 
         [Required]
         [MaxLength(50)]
+        [ValidUserRole] // Aplica la validación personalizada aquí
         public string Rol { get; set; } = string.Empty;
 
-        public string RefreshToken { get; set; } = string.Empty;
+        public string? RefreshToken { get; set; }
 
         public DateTime? RefreshTokenExpiry { get; set; } = new DateTime(1753, 1, 1);
     }

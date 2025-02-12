@@ -22,7 +22,7 @@ namespace Kiosco.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState); // Esto capturará errores de validación
             }
 
             try
