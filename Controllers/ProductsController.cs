@@ -57,23 +57,23 @@ namespace Kiosco.Controllers
         /// Crea un nuevo producto.
         /// </summary>
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(ProductDto productDto)
+        public async Task<IActionResult> PostProduct(ProductDto productDto)
         {
-            // Validar que la categoría exista
-            var categoryExists = await _context.Categories.AnyAsync(c => c.Id == productDto.CategoriaId);
-            if (!categoryExists)
+            // Verificar si ya existe un producto con el mismo nombre
+            bool exists = await _context.Products.AnyAsync(p => p.Nombre == productDto.Nombre);
+
+            if (exists)
             {
-                return BadRequest(new { message = $"La categoría con ID {productDto.CategoriaId} no existe." });
+                return BadRequest(new { message = "Ya existe un producto con el mismo nombre." });
             }
 
-            // Mapear el DTO al modelo de entidad
             var product = new Product
             {
                 Nombre = productDto.Nombre,
                 Descripcion = productDto.Descripcion,
                 Precio = productDto.Precio,
                 Stock = productDto.Stock,
-                CategoriaId = productDto.CategoriaId,
+                CategoriaId = productDto.CategoriaId
             };
 
             _context.Products.Add(product);

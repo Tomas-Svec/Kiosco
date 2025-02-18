@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kiosco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212011301_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250214180120_AddMedioPagoToSales")]
+    partial class AddMedioPagoToSales
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,7 +189,6 @@ namespace Kiosco.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RefreshTokenExpiry")
@@ -202,7 +201,7 @@ namespace Kiosco.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Kiosco.Models.AuditLog", b =>
@@ -221,7 +220,7 @@ namespace Kiosco.Migrations
                     b.HasOne("Kiosco.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -247,7 +246,7 @@ namespace Kiosco.Migrations
                         .IsRequired();
 
                     b.HasOne("Kiosco.Models.Sale", "Sale")
-                        .WithMany()
+                        .WithMany("SaleDetails")
                         .HasForeignKey("VentaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -255,6 +254,11 @@ namespace Kiosco.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Kiosco.Models.Sale", b =>
+                {
+                    b.Navigation("SaleDetails");
                 });
 #pragma warning restore 612, 618
         }

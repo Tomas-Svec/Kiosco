@@ -4,13 +4,12 @@ namespace Kiosco.DTOs
 {
     public class SaleDto
     {
-        [Required(ErrorMessage = "El ID del empleado es obligatorio")]
-        public int EmpleadoId { get; set; }
-
-        [Range(0.01, double.MaxValue, ErrorMessage = "El total debe ser mayor que cero")]
+        public int Id { get; set; }
+        public DateTime FechaVenta { get; set; }
         public decimal Total { get; set; }
-
-        [Range(0, double.MaxValue, ErrorMessage = "El descuento no puede ser negativo")]
-        public decimal Descuento { get; set; } = 0;
+        public int EmpleadoId { get; set; }
+        public decimal Descuento { get; set; }
+        public string MedioPago { get; set; }
+        public List<SaleDetailDto> SaleDetails { get; set; }
     }
 }

@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Registrar AuthService
 builder.Services.AddTransient<AuthService>();
 
+
+
 // Configurar DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

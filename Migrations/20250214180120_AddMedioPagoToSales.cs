@@ -5,7 +5,7 @@
 namespace Kiosco.Migrations
 {
     /// <inheritdoc />
-    public partial class CascadeDeleteForCategories : Migration
+    public partial class AddMedioPagoToSales : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

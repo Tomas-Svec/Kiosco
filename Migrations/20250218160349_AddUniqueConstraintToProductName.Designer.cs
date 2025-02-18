@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kiosco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212022839_AddUserRoleValidationn")]
-    partial class AddUserRoleValidationn
+    [Migration("20250218160349_AddUniqueConstraintToProductName")]
+    partial class AddUniqueConstraintToProductName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace Kiosco.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -100,6 +100,9 @@ namespace Kiosco.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
+
+                    b.HasIndex("Nombre", "Descripcion", "Precio", "Stock")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });
@@ -120,6 +123,11 @@ namespace Kiosco.Migrations
 
                     b.Property<DateTime>("FechaVenta")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("MedioPago")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
@@ -246,7 +254,7 @@ namespace Kiosco.Migrations
                         .IsRequired();
 
                     b.HasOne("Kiosco.Models.Sale", "Sale")
-                        .WithMany()
+                        .WithMany("SaleDetails")
                         .HasForeignKey("VentaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -254,6 +262,11 @@ namespace Kiosco.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Kiosco.Models.Sale", b =>
+                {
+                    b.Navigation("SaleDetails");
                 });
 #pragma warning restore 612, 618
         }

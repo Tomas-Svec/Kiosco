@@ -3,6 +3,7 @@ using Kiosco.Data;
 using Kiosco.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Kiosco.Controllers
 {
@@ -142,6 +143,34 @@ namespace Kiosco.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("profile")]
+        public IActionResult GetProfile()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return NotFound("Usuario no encontrado");
+            }
+
+            var user = _context.Users
+                .Where(u => u.Id == int.Parse(userId))
+                .Select(u => new {
+                    u.Id,
+                    u.Nombre,
+                    u.Apellido,
+                    u.Email,
+                })
+                .FirstOrDefault();
+
+            if (user == null)
+            {
+                return NotFound("Usuario no encontrado en la base de datos");
+            }
+
+            return Ok(user);
         }
     }
 }

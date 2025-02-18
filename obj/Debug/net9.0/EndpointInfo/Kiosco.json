@@ -530,24 +530,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -885,6 +868,28 @@
               "type": "string",
               "default": "FechaVenta"
             }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "asc"
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -918,24 +923,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -958,24 +946,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Sale"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -1209,6 +1180,18 @@
           }
         }
       }
+    },
+    "/api/User/profile": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1285,10 +1268,6 @@
         "additionalProperties": false
       },
       "CompleteSaleDto": {
-        "required": [
-          "detalles",
-          "empleadoId"
-        ],
         "type": "object",
         "properties": {
           "empleadoId": {
@@ -1296,20 +1275,24 @@
             "format": "int32"
           },
           "total": {
-            "minimum": 0,01,
             "type": "number",
             "format": "double"
           },
           "descuento": {
-            "minimum": 0,
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
+          },
+          "medioPago": {
+            "type": "string",
+            "nullable": true
           },
           "detalles": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SaleDetailDto"
-            }
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1452,6 +1435,7 @@
       "Sale": {
         "required": [
           "fechaVenta",
+          "medioPago",
           "total"
         ],
         "type": "object",
@@ -1478,6 +1462,18 @@
           "descuento": {
             "type": "number",
             "format": "double"
+          },
+          "medioPago": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "saleDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SaleDetail"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1519,12 +1515,12 @@
         "additionalProperties": false
       },
       "SaleDetailDto": {
-        "required": [
-          "productoId",
-          "ventaId"
-        ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "ventaId": {
             "type": "integer",
             "format": "int32"
@@ -1534,13 +1530,10 @@
             "format": "int32"
           },
           "cantidad": {
-            "maximum": 2147483647,
-            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
           "precioUnitario": {
-            "minimum": 0,01,
             "type": "number",
             "format": "double"
           }
@@ -1548,24 +1541,38 @@
         "additionalProperties": false
       },
       "SaleDto": {
-        "required": [
-          "empleadoId"
-        ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaVenta": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
           "empleadoId": {
             "type": "integer",
             "format": "int32"
           },
-          "total": {
-            "minimum": 0,01,
+          "descuento": {
             "type": "number",
             "format": "double"
           },
-          "descuento": {
-            "minimum": 0,
-            "type": "number",
-            "format": "double"
+          "medioPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "saleDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SaleDetailDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

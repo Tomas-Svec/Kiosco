@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Kiosco.DTOs;
 using Kiosco.Service;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Kiosco.Controllers
 {
@@ -69,5 +71,7 @@ namespace Kiosco.Controllers
 
             return Ok(result);
         }
+
+        
     }
 }
