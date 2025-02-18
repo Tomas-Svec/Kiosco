@@ -83,13 +83,21 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseStaticFiles();
+
 // Configurar el pipeline de solicitudes HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage(); // Muestra detalles del error en desarrollo
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kiosco API v1");
+    c.RoutePrefix = "swagger"; // Asegura que Swagger esté accesible en /swagger
+});
+
 
 // Usar CORS
 app.UseCors("AllowAll");
