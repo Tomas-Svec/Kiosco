@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <History>True|2025-02-20T14:41:57.1054094Z||;False|2025-02-20T11:37:56.2556976-03:00||;False|2025-02-20T11:31:36.9438275-03:00||;</History>
+    <LastFailureDetails />
+    <_PublishTargetUrl>E:\Kiosco\Kiosco\bin\Release\net9.0\publish\</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=sqlserver.czwy844y2ur0.us-east-1.rds.amazonaws.com%3bDatabase=dbkiosco%3bUser Id=admin504%3bPassword=20010209Xx%24%3bpersist security info=False%3binitial catalog=dbkiosco%3bTrustServerCertificate=True</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

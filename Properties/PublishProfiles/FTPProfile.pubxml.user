@@ -5,9 +5,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/wQPKIjgvkm3FrCk3li57AAAAAACAAAAAAAQZgAAAAEAACAAAACcaVe5z23MtaFLb5t1KUBPV4wHDxAyMexhmS4jnow/2QAAAAAOgAAAAAIAACAAAAAA1q5SzuUtkX06OTYMECdm+7SLyBFXK7iZdJkOno7IWyAAAAAKqHKe8wo+SaRhBo46lkQK8yJEVDH3M9pf5I0bfet0D0AAAADWfqRfwNVuDe/WH3tM1Avs/p32y5X4ypoJyf3hoyXHbd25KmHJsPTT4pbFaVSAKFmKTLjl7p6Ufyz2NaLrelKd</EncryptedPassword>
-    <_PublishTargetUrl>ftp://kiosco.somee.com/www.Kiosco.somee.com</_PublishTargetUrl>
-    <History>True|2025-02-18T21:09:52.7318443Z||;True|2025-02-18T17:43:19.7043931-03:00||;True|2025-02-18T17:32:50.4221555-03:00||;True|2025-02-18T17:23:01.3920332-03:00||;</History>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/wQPKIjgvkm3FrCk3li57AAAAAACAAAAAAAQZgAAAAEAACAAAAA84IqT6BEtWVCBcGclXOv0EcgXktT182QiAGf/ijfvBwAAAAAOgAAAAAIAACAAAADIpfes/f1csE7pXOE9UQ2IHhDgXXBWvvEYsWQNg3x6rSAAAAAsaA7UGxfTFxioQ3mmMW9xYOhdbSoaVmV/CYwTgccaHEAAAAAfmH2iA4beolW7UOG9i46astSwKkvTYNioWU9jtrLHg2ur7pnnWmWKCzAsKlx1QGSFndhf7xG9U/VttYr/QaQw</EncryptedPassword>
+    <_PublishTargetUrl>ftp://155.254.244.34/www.kioscopop.somee.com</_PublishTargetUrl>
+    <History>True|2025-02-19T18:45:05.3350871Z||;True|2025-02-19T13:19:53.5929585-03:00||;True|2025-02-19T13:08:11.9067679-03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -15,10 +15,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/04/2025 11:38:18</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>02/18/2025 17:09:46</publishTime>
+      <publishTime>02/19/2025 12:50:46</publishTime>
     </File>
     <File Include="appsettings.production.json">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:32</publishTime>
+    </File>
+    <File Include="aws-beanstalk-tools-defaults.json">
+      <publishTime>02/19/2025 15:29:44</publishTime>
     </File>
     <File Include="Azure.Core.dll">
       <publishTime>02/26/2024 12:24:40</publishTime>
@@ -30,19 +33,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/03/2022 13:10:20</publishTime>
     </File>
     <File Include="Kiosco.deps.json">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:31</publishTime>
     </File>
     <File Include="Kiosco.dll">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:30</publishTime>
     </File>
     <File Include="Kiosco.exe">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:30</publishTime>
     </File>
     <File Include="Kiosco.pdb">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:30</publishTime>
     </File>
     <File Include="Kiosco.runtimeconfig.json">
-      <publishTime>02/04/2025 22:03:16</publishTime>
+      <publishTime>02/19/2025 15:41:31</publishTime>
     </File>
     <File Include="Kiosco.staticwebassets.endpoints.json">
       <publishTime>02/18/2025 17:29:17</publishTime>
@@ -174,12 +177,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2021 20:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>02/18/2025 18:06:18</publishTime>
+      <publishTime>02/19/2025 15:41:32</publishTime>
     </File>
   </ItemGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>workstation id=dbkiosco.mssql.somee.com%3bpacket size=4096%3buser id=Tomassvec_SQLLogin_1%3bpwd=m9brqbxsw8%3bdata source=dbkiosco.mssql.somee.com%3bpersist security info=False%3binitial catalog=dbkiosco%3bTrustServerCertificate=True</Value>
+      <Value>Server=sqlserver.czwy844y2ur0.us-east-1.rds.amazonaws.com%3bDatabase=dbkiosco%3bUser Id=admin504%3bPassword=20010209Xx%24%3bpersist security info=False%3binitial catalog=dbkiosco%3bTrustServerCertificate=True</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

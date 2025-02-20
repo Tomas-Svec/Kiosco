@@ -1,6 +1,7 @@
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\Kiosco.exe
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\appsettings.Development.json
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\appsettings.json
+E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\aws-beanstalk-tools-defaults.json
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\Kiosco.dll
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\Kiosco.runtimeconfig.json
 E:\Kiosco\Kiosco\obj\Debug\net9.0\PubTmp\Out\Kiosco.pdb
