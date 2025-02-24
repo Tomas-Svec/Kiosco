@@ -183,3 +183,4 @@ E:\Kiosco\Kiosco\bin\Debug\net9.0\Amazon.Lambda.Logging.AspNetCore.dll
 E:\Kiosco\Kiosco\bin\Debug\net9.0\Amazon.Lambda.RuntimeSupport.dll
 E:\Kiosco\Kiosco\bin\Debug\net9.0\Amazon.Lambda.Serialization.SystemTextJson.dll
 E:\Kiosco\Kiosco\bin\Debug\net9.0\SnapshotRestore.Registry.dll
+E:\Kiosco\Kiosco\bin\Debug\net9.0\aws-lambda-tools-defaults.json
