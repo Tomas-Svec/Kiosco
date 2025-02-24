@@ -4,11 +4,12 @@
     "configuration" : "Debug",
     "framework"     : "net9.0",
     "self-contained" : false,
-    "application"    : "ultima",
-    "environment"    : "Ultima-env",
+    "application"    : "Kiosco-API",
+    "environment"    : "Kiosco-API-env",
     "app-path"       : "/",
     "iis-website"    : "Default Web Site",
     "enable-xray"    : false,
     "enhanced-health-type" : "enhanced",
-    "additional-options"   : ""
+    "additional-options"   : "",
+    "proxy-server"         : "nginx"
 }
