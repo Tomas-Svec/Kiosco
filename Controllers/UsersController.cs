@@ -149,12 +149,11 @@ namespace Kiosco.Controllers
         public IActionResult GetProfile()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
+            Console.WriteLine($"UserId from token: {userId}");
             if (userId == null)
             {
                 return NotFound("Usuario no encontrado");
             }
-
             var user = _context.Users
                 .Where(u => u.Id == int.Parse(userId))
                 .Select(u => new {
@@ -164,12 +163,11 @@ namespace Kiosco.Controllers
                     u.Email,
                 })
                 .FirstOrDefault();
-
+            Console.WriteLine($"User found: {user != null}");
             if (user == null)
             {
                 return NotFound("Usuario no encontrado en la base de datos");
             }
-
             return Ok(user);
         }
     }
