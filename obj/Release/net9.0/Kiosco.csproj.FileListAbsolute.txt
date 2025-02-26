@@ -173,3 +173,14 @@ E:\Kiosco\Kiosco\bin\Release\net9.0\NuGet.Frameworks.dll
 E:\Kiosco\Kiosco\bin\Release\net9.0\System.Formats.Asn1.dll
 E:\Kiosco\Kiosco\bin\Release\net9.0\System.Text.Json.dll
 E:\Kiosco\Kiosco\obj\Release\net9.0\staticwebassets.upToDateCheck.txt
+E:\Kiosco\Kiosco\bin\Release\net9.0\aws-ecs-tools-defaults.json
+E:\Kiosco\Kiosco\bin\Release\net9.0\aws-lambda-tools-defaults.json
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.APIGatewayEvents.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.AspNetCoreServer.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.AspNetCoreServer.Hosting.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.Core.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.Logging.AspNetCore.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.RuntimeSupport.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\Amazon.Lambda.Serialization.SystemTextJson.dll
+E:\Kiosco\Kiosco\bin\Release\net9.0\SnapshotRestore.Registry.dll

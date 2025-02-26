@@ -1,0 +1,22 @@
+
+{
+    "region" : "us-east-1",
+    "profile" : "xhencito",
+    "configuration" : "Release",
+    "framework"     : "net9.0",
+    "function-name" : "MyFunction",
+    "function-description" : "",
+    "package-type"         : "Zip",
+    "function-handler"     : "Kiosco",
+    "function-memory-size" : 512,
+    "function-role"        : "arn:aws:iam::676206949384:role/service-role/MyFunction-role-c0vuxfj7",
+    "function-timeout"     : 15,
+    "function-runtime"     : "provided",
+    "function-architecture" : "x86_64",
+    "function-subnets"      : "",
+    "function-security-groups" : "",
+    "tracing-mode"             : "PassThrough",
+    "environment-variables"    : "",
+    "dockerfile"               : "Dockerfile",
+    "image-tag"                : ""
+}
